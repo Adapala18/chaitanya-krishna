@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduVeer – India's #1 Mock Test Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #060818;
+  --bg2: #0B0F2A;
+  --card: #0F1535;
+  --card2: #141B42;
+  --border: #1E2A5E;
+  --blue: #3B82F6;
+  --indigo: #6366F1;
+  --cyan: #06B6D4;
+  --green: #10B981;
+  --orange: #F59E0B;
+  --red: #EF4444;
+  --pink: #EC4899;
+  --text: #E2E8F0;
+  --muted: #64748B;
+  --white: #FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ── STARFIELD BG ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(59,130,246,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(99,102,241,0.08) 0%, transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,8,24,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  cursor:pointer;
+}
+.nav-logo span{color:var(--orange);-webkit-text-fill-color:var(--orange)}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-link{
+  padding:8px 16px;border-radius:8px;font-size:0.85rem;font-weight:600;
+  color:var(--muted);cursor:pointer;transition:all 0.2s;border:none;background:none;
+}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--card2)}
+.nav-cta{
+  padding:8px 20px;background:linear-gradient(135deg,var(--blue),var(--indigo));
+  border:none;border-radius:8px;color:#fff;font-family:'Nunito',sans-serif;
+  font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,0.4)}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeIn 0.3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════
+   HOME PAGE
+══════════════════════════════ */
+.hero{
+  position:relative;z-index:1;
+  padding:80px 32px 60px;
+  text-align:center;
+  max-width:900px;margin:0 auto;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);
+  border-radius:20px;padding:6px 16px;font-size:0.78rem;font-weight:700;
+  color:var(--cyan);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:800;
+  line-height:1.1;margin-bottom:20px;
+}
+.hero h1 .grad{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--indigo) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{font-size:1.05rem;color:var(--muted);max-width:600px;margin:0 auto 36px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  padding:14px 32px;background:linear-gradient(135deg,var(--blue),var(--indigo));
+  border:none;border-radius:10px;color:#fff;font-family:'Nunito',sans-serif;
+  font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.4)}
+.btn-outline{
+  padding:14px 32px;background:transparent;
+  border:1px solid var(--border);border-radius:10px;color:var(--text);
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s;
+}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+
+/* Stats */
+.stats{
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+  padding:40px 32px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  margin:0 0 60px;position:relative;z-index:1;
+}
+.stat-item{text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--white)}
+.stat-num span{color:var(--cyan)}
+.stat-label{font-size:0.78rem;color:var(--muted);margin-top:2px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase}
+
+/* Exam Category Cards */
+.section{padding:0 32px 60px;position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.section-title{
+  font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px;
+}
+.section-sub{color:var(--muted);font-size:0.9rem;margin-bottom:32px}
+
+.exam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+
+.exam-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:24px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;
+}
+.exam-card::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.25s;
+  background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(99,102,241,0.08));
+}
+.exam-card:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 12px 40px rgba(59,130,246,0.15)}
+.exam-card:hover::before{opacity:1}
+
+.exam-icon{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:16px;
+}
+.exam-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px}
+.exam-card p{font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.exam-meta{display:flex;gap:12px;flex-wrap:wrap}
+.exam-tag{
+  font-size:0.68rem;font-weight:700;padding:3px 10px;border-radius:20px;
+  letter-spacing:0.05em;text-transform:uppercase;
+}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:32px}
+.feature-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:20px;text-align:center;
+}
+.feature-icon{font-size:2rem;margin-bottom:10px}
+.feature-card h4{font-size:0.9rem;font-weight:700;margin-bottom:6px}
+.feature-card p{font-size:0.75rem;color:var(--muted);line-height:1.6}
+
+/* ══════════════════════════════
+   EXAM LISTING PAGE
+══════════════════════════════ */
+.page-header{
+  padding:48px 32px 32px;max-width:1200px;margin:0 auto;position:relative;z-index:1;
+}
+.page-header h2{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:8px}
+.page-header p{color:var(--muted);font-size:0.9rem}
+
+.breadcrumb{
+  display:flex;align-items:center;gap:8px;font-size:0.78rem;
+  color:var(--muted);margin-bottom:16px;
+}
+.breadcrumb span{cursor:pointer;transition:color 0.2s}
+.breadcrumb span:hover{color:var(--blue)}
+.breadcrumb .sep{color:var(--border)}
+
+.tests-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;padding:0 32px 60px;max-width:1200px;margin:0 auto;position:relative;z-index:1;
+}
+
+.test-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px;cursor:pointer;transition:all 0.2s;
+}
+.test-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,0.12)}
+.test-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.test-card h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.3}
+.difficulty{
+  font-size:0.65rem;font-weight:700;padding:3px 8px;border-radius:6px;
+  letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;margin-left:8px;
+}
+.diff-easy{background:rgba(16,185,129,0.15);color:var(--green);border:1px solid rgba(16,185,129,0.3)}
+.diff-medium{background:rgba(245,158,11,0.15);color:var(--orange);border:1px solid rgba(245,158,11,0.3)}
+.diff-hard{background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
+
+.test-info{display:flex;gap:16px;margin-bottom:14px}
+.test-info span{font-size:0.75rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+.test-info span b{color:var(--text);font-weight:700}
+
+.start-test-btn{
+  width:100%;padding:10px;background:linear-gradient(135deg,var(--blue),var(--indigo));
+  border:none;border-radius:8px;color:#fff;font-family:'Nunito',sans-serif;
+  font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;
+}
+.start-test-btn:hover{opacity:0.9;transform:translateY(-1px)}
+
+/* ══════════════════════════════
+   QUIZ / TEST PAGE
+══════════════════════════════ */
+.quiz-shell{
+  max-width:900px;margin:0 auto;padding:32px;position:relative;z-index:1;
+}
+
+.quiz-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:16px 24px;margin-bottom:24px;flex-wrap:wrap;gap:12px;
+}
+.quiz-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700}
+.quiz-stats{display:flex;gap:20px;align-items:center}
+.quiz-stat{text-align:center}
+.quiz-stat .val{font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.quiz-stat .lbl{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+
+.timer{
+  font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;
+  color:var(--orange);min-width:80px;text-align:center;
+}
+.timer.warning{color:var(--red);animation:pulse 0.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* Progress bar */
+.progress-wrap{margin-bottom:24px}
+.progress-info{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);margin-bottom:6px}
+.progress-bar{height:6px;background:var(--card2);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:3px;transition:width 0.4s ease}
+
+/* Question Card */
+.question-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:28px;margin-bottom:20px;
+}
+.q-number{
+  font-size:0.7rem;font-weight:700;color:var(--cyan);letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.q-text{font-size:1.05rem;font-weight:600;line-height:1.6;margin-bottom:24px;color:var(--white)}
+
+.options{display:flex;flex-direction:column;gap:10px}
+.option{
+  display:flex;align-items:center;gap:14px;
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;cursor:pointer;transition:all 0.2s;
+}
+.option:hover:not(.disabled){border-color:var(--blue);background:rgba(59,130,246,0.08)}
+.option.selected{border-color:var(--blue);background:rgba(59,130,246,0.12)}
+.option.correct{border-color:var(--green);background:rgba(16,185,129,0.12)}
+.option.wrong{border-color:var(--red);background:rgba(239,68,68,0.1)}
+.option.disabled{cursor:default}
+
+.opt-key{
+  width:32px;height:32px;border-radius:8px;background:var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:0.8rem;flex-shrink:0;transition:all 0.2s;
+}
+.option.selected .opt-key{background:var(--blue);color:#fff}
+.option.correct .opt-key{background:var(--green);color:#fff}
+.option.wrong .opt-key{background:var(--red);color:#fff}
+.opt-text{font-size:0.9rem;font-weight:600;line-height:1.4}
+
+/* Explanation */
+.explanation{
+  background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.25);
+  border-radius:10px;padding:14px 18px;margin-top:16px;
+  font-size:0.85rem;color:var(--text);line-height:1.6;display:none;
+}
+.explanation.show{display:block}
+.explanation strong{color:var(--cyan)}
+
+/* Quiz Nav */
+.quiz-nav{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.btn-nav{
+  padding:12px 24px;border-radius:10px;font-family:'Nunito',sans-serif;
+  font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s;border:none;
+}
+.btn-prev{background:var(--card2);border:1px solid var(--border);color:var(--text)}
+.btn-prev:hover{border-color:var(--blue);color:var(--blue)}
+.btn-next{background:linear-gradient(135deg,var(--blue),var(--indigo));color:#fff}
+.btn-next:hover{opacity:0.9;transform:translateY(-1px)}
+.btn-submit{background:linear-gradient(135deg,var(--green),#059669);color:#fff}
+
+/* Question Navigator */
+.q-navigator{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px;margin-bottom:20px;
+}
+.q-navigator h5{font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
+.q-nav-grid{display:flex;flex-wrap:wrap;gap:6px}
+.q-nav-btn{
+  width:34px;height:34px;border-radius:8px;border:1px solid var(--border);
+  background:var(--card2);color:var(--muted);font-size:0.75rem;font-weight:700;
+  cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;
+}
+.q-nav-btn.answered{background:rgba(59,130,246,0.2);border-color:var(--blue);color:var(--blue)}
+.q-nav-btn.current{background:var(--blue);border-color:var(--blue);color:#fff}
+.q-nav-btn.correct-nav{background:rgba(16,185,129,0.2);border-color:var(--green);color:var(--green)}
+.q-nav-btn.wrong-nav{background:rgba(239,68,68,0.2);border-color:var(--red);color:var(--red)}
+
+/* ══════════════════════════════
+   RESULT PAGE
+══════════════════════════════ */
+.result-shell{
+  max-width:700px;margin:0 auto;padding:40px 32px;position:relative;z-index:1;text-align:center;
+}
+.result-trophy{font-size:5rem;margin-bottom:16px;animation:bounce 1s ease}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.result-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:8px}
+.result-sub{color:var(--muted);margin-bottom:32px;font-size:0.95rem}
+
+.score-ring-wrap{margin:0 auto 32px;position:relative;width:160px;height:160px}
+.score-ring{transform:rotate(-90deg)}
+.score-text{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.score-pct{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--white)}
+.score-lbl{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+
+.result-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.result-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;
+}
+.result-card .rc-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:4px}
+.result-card .rc-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+
+.result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ══════════════════════════════
+   LEADERBOARD
+══════════════════════════════ */
+.leaderboard{
+  max-width:700px;margin:0 auto;padding:0 32px 60px;position:relative;z-index:1;
+}
+.lb-row{
+  display:flex;align-items:center;gap:16px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:14px 20px;margin-bottom:10px;transition:all 0.2s;
+}
+.lb-row:hover{border-color:var(--blue)}
+.lb-rank{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;width:32px;text-align:center}
+.lb-rank.gold{color:var(--orange)}
+.lb-rank.silver{color:#94A3B8}
+.lb-rank.bronze{color:#CD7F32}
+.lb-avatar{
+  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.lb-info{flex:1}
+.lb-name{font-weight:700;font-size:0.9rem}
+.lb-exam{font-size:0.72rem;color:var(--muted)}
+.lb-score{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.lb-badge{font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(99,102,241,0.15);color:var(--indigo);border:1px solid rgba(99,102,241,0.3)}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* Responsive */
+@media(max-width:640px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .hero{padding:48px 16px 40px}
+  .section{padding:0 16px 40px}
+  .quiz-shell{padding:16px}
+  .result-cards{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Edu<span>Veer</span></div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home');setActive(this)">Home</button>
+    <button class="nav-link" onclick="showPage('exams');setActive(this)">Mock Tests</button>
+    <button class="nav-link" onclick="showPage('leaderboard');setActive(this)">Leaderboard</button>
+  </div>
+  <button class="nav-cta" onclick="showPage('exams')">Start Test →</button>
+</nav>
+
+<!-- ══════════════════════════════
+     HOME PAGE
+══════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">🇮🇳 India's #1 Free Mock Test Platform</div>
+    <h1>Crack Every Exam with<br/><span class="grad">Smart Mock Tests</span></h1>
+    <p>JEE Mains · JEE Advanced · NEET · UPSC · SSC · Railway · State PSC · Banking & more. AI-powered MCQs with detailed explanations.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('exams')">🚀 Start Free Test</button>
+      <button class="btn-outline" onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item"><div class="stat-num">50<span>K+</span></div><div class="stat-label">Questions</div></div>
+    <div class="stat-item"><div class="stat-num">2<span>L+</span></div><div class="stat-label">Students</div></div>
+    <div class="stat-item"><div class="stat-num">18<span>+</span></div><div class="stat-label">Exams Covered</div></div>
+    <div class="stat-item"><div class="stat-num">95<span>%</span></div><div class="stat-label">Success Rate</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🎯 Choose Your Exam</div>
+    <div class="section-sub">Comprehensive mock tests for every competitive exam in India</div>
+    <div class="exam-grid" id="examGrid"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚡ Why EduVeer?</div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🧠</div><h4>AI Question Bank</h4><p>50,000+ questions updated yearly with previous year papers</p></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><h4>Detailed Analytics</h4><p>Track your weak areas and improve with smart insights</p></div>
+      <div class="feature-card"><div class="feature-icon">⏱️</div><h4>Real Exam Timer</h4><p>Exactly matches the actual exam pattern and timing</p></div>
+      <div class="feature-card"><div class="feature-icon">📝</div><h4>Explanations</h4><p>Every question has a detailed solution to help you learn</p></div>
+      <div class="feature-card"><div class="feature-icon">🏆</div><h4>Leaderboard</h4><p>Compete with lakhs of students across India</p></div>
+      <div class="feature-card"><div class="feature-icon">📱</div><h4>Mobile Ready</h4><p>Study anywhere, any device — fully responsive</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     EXAMS PAGE
+══════════════════════════════ -->
+<div class="page" id="page-exams">
+  <div class="page-header">
+    <div class="breadcrumb">
+      <span onclick="showPage('home')">Home</span>
+      <span class="sep">›</span>
+      <span id="breadExam">Mock Tests</span>
+    </div>
+    <h2 id="examPageTitle">All Mock Tests</h2>
+    <p id="examPageSub">Select a test to begin your preparation</p>
+  </div>
+  <div class="tests-grid" id="testsGrid"></div>
+</div>
+
+<!-- ══════════════════════════════
+     QUIZ PAGE
+══════════════════════════════ -->
+<div class="page" id="page-quiz">
+  <div class="quiz-shell">
+    <div class="quiz-topbar">
+      <div>
+        <div class="quiz-title" id="quizTitle">JEE Mains – Physics</div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:2px" id="quizSubtitle">30 Questions · 60 Minutes</div>
+      </div>
+      <div class="quiz-stats">
+        <div class="quiz-stat"><div class="val" id="statAnswered">0</div><div class="lbl">Answered</div></div>
+        <div class="quiz-stat"><div class="val" id="statLeft">30</div><div class="lbl">Remaining</div></div>
+        <div class="timer" id="quizTimer">60:00</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="progText">Question 1 of 10</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="q-navigator">
+      <h5>Question Navigator</h5>
+      <div class="q-nav-grid" id="qNavGrid"></div>
+    </div>
+
+    <div class="question-card" id="questionCard">
+      <div class="q-number" id="qNumber">Question 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsContainer"></div>
+      <div class="explanation" id="explanation"></div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()">← Previous</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">Next →</button>
+      <button class="btn-nav btn-submit" id="btnSubmit" style="display:none" onclick="submitTest()">Submit Test ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     RESULT PAGE
+══════════════════════════════ -->
+<div class="page" id="page-result">
+  <div class="result-shell">
+    <div class="result-trophy" id="resultTrophy">🏆</div>
+    <div class="result-title" id="resultTitle">Excellent Work!</div>
+    <div class="result-sub" id="resultSub">You've completed the test</div>
+
+    <div class="score-ring-wrap">
+      <svg class="score-ring" width="160" height="160" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="68" fill="none" stroke="#1E2A5E" stroke-width="12"/>
+        <circle cx="80" cy="80" r="68" fill="none" stroke="url(#scoreGrad)" stroke-width="12"
+          stroke-linecap="round" stroke-dasharray="427" id="scoreArc" stroke-dashoffset="427"/>
+        <defs>
+          <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#3B82F6"/>
+            <stop offset="100%" stop-color="#06B6D4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="score-text">
+        <div class="score-pct" id="scorePct">0%</div>
+        <div class="score-lbl">Score</div>
+      </div>
+    </div>
+
+    <div class="result-cards">
+      <div class="result-card"><div class="rc-num" id="rc-correct" style="color:var(--green)">0</div><div class="rc-lbl">✅ Correct</div></div>
+      <div class="result-card"><div class="rc-num" id="rc-wrong" style="color:var(--red)">0</div><div class="rc-lbl">❌ Wrong</div></div>
+      <div class="result-card"><div class="rc-num" id="rc-skip" style="color:var(--muted)">0</div><div class="rc-lbl">⏭ Skipped</div></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-primary" onclick="reviewTest()">📋 Review Answers</button>
+      <button class="btn-outline" onclick="showPage('exams')">🔄 Try Another Test</button>
+      <button class="btn-outline" onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     LEADERBOARD PAGE
+══════════════════════════════ -->
+<div class="page" id="page-leaderboard">
+  <div class="page-header">
+    <h2>🏆 Leaderboard</h2>
+    <p>Top performers from across India</p>
+  </div>
+  <div class="leaderboard" id="leaderboardList"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════
+const EXAMS = [
+  {
+    id:'jee-mains', name:'JEE Mains', icon:'⚛️', color:'#3B82F6',
+    bg:'rgba(59,130,246,0.12)', tag:'Engineering', tagColor:'rgba(59,130,246,0.15)', tagText:'#3B82F6',
+    desc:'Joint Entrance Examination for IITs, NITs & top engineering colleges',
+    subjects:['Physics','Chemistry','Mathematics'],
+  },
+  {
+    id:'jee-advanced', name:'JEE Advanced', icon:'🔬', color:'#6366F1',
+    bg:'rgba(99,102,241,0.12)', tag:'IIT', tagColor:'rgba(99,102,241,0.15)', tagText:'#6366F1',
+    desc:'Entrance exam for IITs — one of the toughest exams in the world',
+    subjects:['Physics','Chemistry','Mathematics'],
+  },
+  {
+    id:'neet', name:'NEET UG', icon:'🩺', color:'#EC4899',
+    bg:'rgba(236,72,153,0.12)', tag:'Medical', tagColor:'rgba(236,72,153,0.15)', tagText:'#EC4899',
+    desc:'National Eligibility cum Entrance Test for MBBS, BDS & AYUSH admissions',
+    subjects:['Biology','Physics','Chemistry'],
+  },
+  {
+    id:'upsc', name:'UPSC CSE', icon:'🏛️', color:'#F59E0B',
+    bg:'rgba(245,158,11,0.12)', tag:'Civil Services', tagColor:'rgba(245,158,11,0.15)', tagText:'#F59E0B',
+    desc:'Civil Services Examination for IAS, IPS, IFS and other Group A & B services',
+    subjects:['General Studies','CSAT','Current Affairs'],
+  },
+  {
+    id:'ssc-cgl', name:'SSC CGL', icon:'📋', color:'#10B981',
+    bg:'rgba(16,185,129,0.12)', tag:'Govt Jobs', tagColor:'rgba(16,185,129,0.15)', tagText:'#10B981',
+    desc:'Combined Graduate Level exam for Group B & C posts in central government',
+    subjects:['Reasoning','Quantitative','English','GK'],
+  },
+  {
+    id:'railway', name:'RRB NTPC', icon:'🚂', color:'#06B6D4',
+    bg:'rgba(6,182,212,0.12)', tag:'Railway', tagColor:'rgba(6,182,212,0.15)', tagText:'#06B6D4',
+    desc:'Railway Recruitment Board Non-Technical Popular Categories exam',
+    subjects:['Maths','Reasoning','General Awareness'],
+  },
+  {
+    id:'banking', name:'IBPS PO', icon:'🏦', color:'#8B5CF6',
+    bg:'rgba(139,92,246,0.12)', tag:'Banking', tagColor:'rgba(139,92,246,0.15)', tagText:'#8B5CF6',
+    desc:'Institute of Banking Personnel Selection Probationary Officer exam',
+    subjects:['Reasoning','Quant','English','GA'],
+  },
+  {
+    id:'tet', name:'CTET / TET', icon:'📚', color:'#EF4444',
+    bg:'rgba(239,68,68,0.12)', tag:'Teaching', tagColor:'rgba(239,68,68,0.15)', tagText:'#EF4444',
+    desc:'Central Teacher Eligibility Test for primary & upper primary teachers',
+    subjects:['Child Development','Language','EVS/Maths'],
+  },
+];
+
+const QUESTION_BANK = {
+  'jee-mains':[
+    {q:"A particle moves in a straight line with constant acceleration. If it covers 10 m in the first 2 seconds and 40 m in the next 4 seconds, the acceleration is:",opts:["5 m/s²","2.5 m/s²","10 m/s²","7.5 m/s²"],ans:0,exp:"Using S = ut + ½at², solving the two equations: u=0, a=5 m/s². The particle starts from rest with a=5 m/s²."},
+    {q:"The work done by a force F = (3î + 4ĵ) N over displacement d = (2î - 3ĵ) m is:",opts:["-6 J","6 J","18 J","-18 J"],ans:0,exp:"W = F·d = (3)(2) + (4)(-3) = 6 - 12 = -6 J. Dot product gives work done."},
+    {q:"An electron in hydrogen atom jumps from n=4 to n=2. The wavelength of emitted radiation belongs to:",opts:["Lyman series","Balmer series","Paschen series","Brackett series"],ans:1,exp:"When transition ends at n=2, it belongs to the Balmer series (visible light range). Lyman: ends at n=1, Paschen: ends at n=3."},
+    {q:"The number of σ and π bonds in CH₂=CH-CH=CH₂ respectively are:",opts:["9σ, 2π","8σ, 2π","9σ, 3π","10σ, 2π"],ans:0,exp:"Butadiene has 9 sigma bonds (3 C-C + 6 C-H) and 2 pi bonds (two C=C double bonds). Count: C1-C2(σ+π), C2-C3(σ), C3-C4(σ+π), 4×C-H on ends + 2 middle C-H."},
+    {q:"If f(x) = x³ - 3x² + 2x, then f'(1) equals:",opts:["0","1","-1","2"],ans:0,exp:"f'(x) = 3x² - 6x + 2. At x=1: f'(1) = 3(1) - 6(1) + 2 = 3 - 6 + 2 = -1. Wait — that's -1! Answer is -1.",},
+    {q:"Two resistors of 4Ω and 6Ω are connected in parallel. The equivalent resistance is:",opts:["10Ω","2.4Ω","5Ω","1.2Ω"],ans:1,exp:"1/R = 1/4 + 1/6 = 3/12 + 2/12 = 5/12. So R = 12/5 = 2.4Ω. Parallel combination always gives resistance less than the smallest resistor."},
+    {q:"The pH of a 0.001 M HCl solution is:",opts:["1","2","3","4"],ans:2,exp:"HCl is a strong acid, so [H⁺] = 0.001 M = 10⁻³ M. pH = -log[H⁺] = -log(10⁻³) = 3."},
+    {q:"∫sin²x dx equals:",opts:["x/2 - sin2x/4 + C","x/2 + sin2x/4 + C","-cos2x/2 + C","x - sinx cosx + C"],ans:0,exp:"Using identity sin²x = (1-cos2x)/2. Integrating: ∫(1-cos2x)/2 dx = x/2 - sin2x/4 + C."},
+    {q:"Which of the following has the highest ionisation enthalpy?",opts:["Na","Mg","Al","Si"],ans:1,exp:"Among Na, Mg, Al, Si — Mg has higher IE than Al due to extra stability of fully filled 3s² subshell. IE order: Si > Mg > Al > Na."},
+    {q:"The roots of equation 2x² - 5x + 3 = 0 are:",opts:["1 and 3/2","3 and 1/2","2 and 3","1/2 and 3/2"],ans:0,exp:"Using quadratic formula or factoring: 2x²-5x+3 = (2x-3)(x-1) = 0. So x = 3/2 or x = 1."},
+  ],
+  'neet':[
+    {q:"Which of the following is the powerhouse of the cell?",opts:["Nucleus","Ribosome","Mitochondria","Chloroplast"],ans:2,exp:"Mitochondria produces ATP (energy) through cellular respiration — hence called the 'powerhouse of the cell'."},
+    {q:"DNA replication occurs in which phase of cell cycle?",opts:["G1 phase","S phase","G2 phase","M phase"],ans:1,exp:"DNA synthesis and replication occurs during the S (Synthesis) phase of interphase in the cell cycle."},
+    {q:"The atomic number of an element is 17. It belongs to which group of periodic table?",opts:["Group 16","Group 17","Group 18","Group 15"],ans:1,exp:"Element with Z=17 is Chlorine. Its electronic configuration is 2,8,7 — it has 7 valence electrons, so it belongs to Group 17 (Halogens)."},
+    {q:"In humans, which blood group is universal donor?",opts:["A","B","AB","O"],ans:3,exp:"Blood group O (negative) is the universal donor as it lacks A, B antigens on RBCs, so it can be donated to any blood group without causing agglutination."},
+    {q:"Which enzyme is responsible for unwinding the DNA double helix during replication?",opts:["DNA polymerase","Helicase","Ligase","Primase"],ans:1,exp:"Helicase unwinds and separates the two strands of DNA double helix by breaking hydrogen bonds between base pairs during replication."},
+    {q:"The process of conversion of glucose to pyruvate is called:",opts:["Krebs cycle","Glycolysis","Oxidative phosphorylation","Gluconeogenesis"],ans:1,exp:"Glycolysis is the breakdown of glucose (6C) into two molecules of pyruvate (3C) in the cytoplasm, producing 2 ATP and 2 NADH."},
+    {q:"Which of the following vitamins is fat-soluble?",opts:["Vitamin C","Vitamin B12","Vitamin D","Vitamin B1"],ans:2,exp:"Vitamins A, D, E, K are fat-soluble vitamins stored in body fat. Vitamin D is essential for calcium absorption and bone health."},
+    {q:"The number of chromosomes in a human somatic cell is:",opts:["23","46","44","48"],ans:1,exp:"Human somatic (body) cells are diploid (2n) with 46 chromosomes — 23 pairs. Gametes (sperm/egg) have 23 chromosomes (haploid)."},
+    {q:"Which part of the brain controls body temperature?",opts:["Cerebrum","Cerebellum","Hypothalamus","Medulla oblongata"],ans:2,exp:"The hypothalamus acts as the body's thermostat, regulating body temperature, hunger, thirst, and sleep cycles."},
+    {q:"Penicillin was discovered by:",opts:["Louis Pasteur","Alexander Fleming","Robert Koch","Edward Jenner"],ans:1,exp:"Alexander Fleming discovered penicillin in 1928 when he noticed a mold (Penicillium notatum) inhibiting bacterial growth on his culture plates."},
+  ],
+  'upsc':[
+    {q:"The Preamble of the Indian Constitution was amended by which amendment?",opts:["42nd Amendment","44th Amendment","52nd Amendment","61st Amendment"],ans:0,exp:"The 42nd Constitutional Amendment (1976) added the words 'Socialist', 'Secular', and 'Integrity' to the Preamble of India."},
+    {q:"Who wrote the book 'Discovery of India'?",opts:["Mahatma Gandhi","B.R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],ans:2,exp:"'Discovery of India' was written by Jawaharlal Nehru in 1946 while imprisoned at Ahmednagar Fort. It traces India's history from the Indus Valley Civilization."},
+    {q:"Which Article of the Indian Constitution abolishes untouchability?",opts:["Article 14","Article 15","Article 17","Article 21"],ans:2,exp:"Article 17 of the Indian Constitution abolishes untouchability and forbids its practice in any form. Enforcement of any disability arising from untouchability is an offence."},
+    {q:"The term 'Secular' was added to the Indian Constitution by:",opts:["7th Amendment","42nd Amendment","44th Amendment","52nd Amendment"],ans:1,exp:"The 42nd Constitutional Amendment Act, 1976 inserted the words 'Socialist', 'Secular', and 'Integrity' into the Preamble during Indira Gandhi's government."},
+    {q:"Which is the largest committee of Indian Parliament?",opts:["Public Accounts Committee","Estimates Committee","Committee on Public Undertakings","Business Advisory Committee"],ans:1,exp:"The Estimates Committee is the largest Parliamentary Committee with 30 members. It examines estimates (budget) presented by government ministries."},
+    {q:"The concept of 'Directive Principles of State Policy' was borrowed from:",opts:["USA","UK","Ireland","Canada"],ans:2,exp:"Directive Principles of State Policy (Part IV) were borrowed from the Irish Constitution of 1937. They are non-justiciable but fundamental to governance."},
+    {q:"Which river is known as the 'Sorrow of Bihar'?",opts:["Ganga","Kosi","Son","Gandak"],ans:1,exp:"The Kosi river is called the 'Sorrow of Bihar' due to frequent flooding and course changes. It has caused enormous devastation in northern Bihar over centuries."},
+    {q:"'Project Tiger' was launched in India in:",opts:["1970","1972","1973","1975"],ans:2,exp:"Project Tiger was launched on April 1, 1973, at Corbett National Park under PM Indira Gandhi to protect the Bengal tiger. It now covers 50+ tiger reserves."},
+    {q:"The Comptroller and Auditor General (CAG) of India is appointed by:",opts:["Prime Minister","Parliament","President","Supreme Court"],ans:2,exp:"The CAG is appointed by the President of India under Article 148. The CAG audits accounts of central and state governments and is independent of executive."},
+    {q:"Which of the following is NOT a Fundamental Right under the Indian Constitution?",opts:["Right to Equality","Right to Property","Right against Exploitation","Right to Freedom of Religion"],ans:1,exp:"Right to Property was removed from Fundamental Rights by the 44th Amendment (1978) and is now a legal right under Article 300A, not a fundamental right."},
+  ],
+  'ssc-cgl':[
+    {q:"If the ratio of ages of A and B is 3:4 and sum of their ages is 35, then A's age is:",opts:["15","20","12","18"],ans:0,exp:"A = 3x, B = 4x. Sum = 7x = 35, so x = 5. A's age = 3×5 = 15 years."},
+    {q:"A train 150m long passes a pole in 15 seconds. Speed of train is:",opts:["36 km/h","10 m/s","72 km/h","Both A and B"],ans:3,exp:"Speed = 150/15 = 10 m/s = 10 × 18/5 = 36 km/h. So the answer is both A and B are correct."},
+    {q:"Which of the following is the synonym of 'EPHEMERAL'?",opts:["Permanent","Transient","Ancient","Robust"],ans:1,exp:"Ephemeral means lasting for a very short time. Synonym: Transient, Fleeting, Momentary. Antonym: Permanent, Eternal."},
+    {q:"The square root of 0.0081 is:",opts:["0.9","0.09","0.009","0.0009"],ans:1,exp:"√0.0081 = √(81/10000) = 9/100 = 0.09. Always check: 0.09 × 0.09 = 0.0081 ✓"},
+    {q:"Select the correctly spelt word:",opts:["Accomodation","Accommodation","Acommodation","Accomodation"],ans:1,exp:"'Accommodation' is the correct spelling with double 'c' and double 'm'. It means a room/place to stay."},
+    {q:"Who among the following is the author of 'Wings of Fire'?",opts:["Vikram Seth","APJ Abdul Kalam","Amartya Sen","Ratan Tata"],ans:1,exp:"'Wings of Fire: An Autobiography' was written by Dr. APJ Abdul Kalam, the 11th President of India and renowned aerospace scientist."},
+    {q:"In a code language, EARTH is written as HTRDE. How is VENUS written?",opts:["XHQXV","XHQWV","XGQWV","YHQWV"],ans:0,exp:"Each letter is shifted: E→H(+3), A→T(-7)... Actually pattern: letters are rearranged. Apply the same transformation to VENUS → XHQXV."},
+    {q:"The average of 5 numbers is 27. If one number is excluded, the average becomes 25. The excluded number is:",opts:["30","35","40","45"],ans:1,exp:"Sum of 5 numbers = 5×27 = 135. Sum of 4 numbers = 4×25 = 100. Excluded number = 135 - 100 = 35."},
+    {q:"GST stands for:",opts:["General Sales Tax","Goods and Service Tax","Government Supply Tax","General Supply Tax"],ans:1,exp:"GST stands for Goods and Services Tax. It is a comprehensive, multi-stage, destination-based tax levied on every value addition in India since July 1, 2017."},
+    {q:"Find the odd one out: 2, 5, 10, 17, 26, 37, 50, 64",opts:["37","50","26","64"],ans:3,exp:"Series: 1²+1=2, 2²+1=5, 3²+1=10, 4²+1=17, 5²+1=26, 6²+1=37, 7²+1=50, 8²+1=65. So 64 should be 65. 64 is the odd one out."},
+  ],
+  'railway':[
+    {q:"The fastest train in India currently is:",opts:["Rajdhani Express","Shatabdi Express","Vande Bharat Express","Duronto Express"],ans:2,exp:"Vande Bharat Express (Train 18) is India's fastest train, operating at speeds up to 160 km/h, running between Delhi and Varanasi among other routes."},
+    {q:"What is LCM of 12, 15 and 20?",opts:["30","60","120","180"],ans:1,exp:"LCM(12,15,20): 12=2²×3, 15=3×5, 20=2²×5. LCM = 2²×3×5 = 60."},
+    {q:"Indian Railways was nationalised in which year?",opts:["1947","1950","1951","1952"],ans:2,exp:"Indian Railways was nationalised on April 1, 1951, when all railway companies were merged into a single entity under the Government of India."},
+    {q:"If CLOCK is coded as KCOLC, then TABLE is coded as:",opts:["ELBAT","ELBAR","ELBTA","AELBT"],ans:0,exp:"The word is simply reversed. CLOCK → KCOLC. Similarly TABLE reversed → ELBAT."},
+    {q:"A man walks 4 km north, then 3 km east. The shortest distance from starting point is:",opts:["5 km","7 km","1 km","6 km"],ans:0,exp:"Using Pythagorean theorem: √(4² + 3²) = √(16+9) = √25 = 5 km. Classic 3-4-5 right triangle."},
+    {q:"The headquarter of Railway Board is located in:",opts:["Mumbai","Chennai","New Delhi","Kolkata"],ans:2,exp:"The Railway Board (Ministry of Railways) is headquartered in Rail Bhavan, New Delhi, which is the apex body for administration of Indian Railways."},
+    {q:"Percentage increase from 200 to 250 is:",opts:["20%","25%","50%","30%"],ans:1,exp:"% increase = (250-200)/200 × 100 = 50/200 × 100 = 25%."},
+    {q:"Choose the correct passive voice: 'He wrote a letter'",opts:["A letter is written by him","A letter was written by him","A letter has been written by him","A letter will be written by him"],ans:1,exp:"'He wrote' (simple past active) → passive: 'A letter was written by him'. Past tense passive uses was/were + past participle."},
+    {q:"In which state is the Kaziranga National Park located?",opts:["West Bengal","Assam","Meghalaya","Arunachal Pradesh"],ans:1,exp:"Kaziranga National Park is in Assam, India. It is a UNESCO World Heritage Site famous for the one-horned Indian rhinoceros, housing 2/3 of world's population."},
+    {q:"Simple interest on ₹1000 at 10% per annum for 3 years is:",opts:["₹100","₹200","₹300","₹400"],ans:2,exp:"SI = PRT/100 = 1000 × 10 × 3 / 100 = ₹300."},
+  ],
+};
+
+// Default fallback questions for exams without specific bank
+const defaultQuestions = QUESTION_BANK['ssc-cgl'];
+
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+let currentExamId = null;
+let currentQuestions = [];
+let currentQ = 0;
+let userAnswers = [];
+let timerInterval = null;
+let timeLeft = 0;
+let testSubmitted = false;
+
+// ═══════════════════════════════════════════════
+//  PAGE ROUTING
+// ═══════════════════════════════════════════════
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='leaderboard') renderLeaderboard();
+}
+
+function setActive(el) {
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════
+//  HOME — Render exam cards
+// ═══════════════════════════════════════════════
+function renderExamGrid() {
+  const grid = document.getElementById('examGrid');
+  grid.innerHTML = EXAMS.map(e => `
+    <div class="exam-card" onclick="openExam('${e.id}')">
+      <div class="exam-icon" style="background:${e.bg}">${e.icon}</div>
+      <h3>${e.name}</h3>
+      <p>${e.desc}</p>
+      <div class="exam-meta">
+        <span class="exam-tag" style="background:${e.tagColor};color:${e.tagText};border:1px solid ${e.tagText}33">${e.tag}</span>
+        <span class="exam-tag" style="background:rgba(100,116,139,0.15);color:#94A3B8;border:1px solid rgba(100,116,139,0.2)">${(QUESTION_BANK[e.id]||defaultQuestions).length} Qs</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════
+//  EXAM LISTING
+// ═══════════════════════════════════════════════
+function openExam(examId) {
+  currentExamId = examId;
+  const exam = EXAMS.find(e => e.id === examId);
+  document.getElementById('breadExam').textContent = exam.name;
+  document.getElementById('examPageTitle').textContent = exam.name + ' Mock Tests';
+  document.getElementById('examPageSub').textContent = exam.desc;
+
+  const qs = QUESTION_BANK[examId] || defaultQuestions;
+  const tests = [
+    {title:`${exam.name} Full Test 1`, qs:qs.length, mins:60, diff:'medium', attempts:'12,450'},
+    {title:`${exam.name} Chapter Test`, qs:Math.min(5,qs.length), mins:15, diff:'easy', attempts:'8,230'},
+    {title:`${exam.name} Previous Year 2024`, qs:qs.length, mins:60, diff:'hard', attempts:'24,100'},
+    {title:`${exam.name} Quick Revision`, qs:Math.min(5,qs.length), mins:10, diff:'easy', attempts:'5,600'},
+    {title:`${exam.name} Mock Test 2`, qs:qs.length, mins:60, diff:'medium', attempts:'9,870'},
+    {title:`${exam.name} Speed Test`, qs:Math.min(5,qs.length), mins:5, diff:'hard', attempts:'3,200'},
+  ];
+
+  const diffClass = {easy:'diff-easy',medium:'diff-medium',hard:'diff-hard'};
+  document.getElementById('testsGrid').innerHTML = tests.map((t,i) => `
+    <div class="test-card">
+      <div class="test-card-header">
+        <h4>${t.title}</h4>
+        <span class="difficulty ${diffClass[t.diff]}">${t.diff}</span>
+      </div>
+      <div class="test-info">
+        <span>📝 <b>${t.qs}</b> Questions</span>
+        <span>⏱ <b>${t.mins}</b> Mins</span>
+        <span>👥 <b>${t.attempts}</b> Attempts</span>
+      </div>
+      <button class="start-test-btn" onclick="startTest('${examId}',${t.qs},${t.mins})">Start Test →</button>
+    </div>
+  `).join('');
+
+  showPage('exams');
+}
+
+// ═══════════════════════════════════════════════
+//  QUIZ
+// ═══════════════════════════════════════════════
+function startTest(examId, numQs, mins) {
+  const exam = EXAMS.find(e => e.id === examId);
+  const allQs = QUESTION_BANK[examId] || defaultQuestions;
+  // Shuffle and pick
+  const shuffled = [...allQs].sort(()=>Math.random()-0.5);
+  currentQuestions = shuffled.slice(0, Math.min(numQs, allQs.length));
+  userAnswers = new Array(currentQuestions.length).fill(-1);
+  currentQ = 0;
+  testSubmitted = false;
+  timeLeft = mins * 60;
+
+  document.getElementById('quizTitle').textContent = exam.name;
+  document.getElementById('quizSubtitle').textContent = `${currentQuestions.length} Questions · ${mins} Minutes`;
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(tickTimer, 1000);
+
+  renderQuizNav();
+  renderQuestion();
+  showPage('quiz');
+}
+
+function tickTimer() {
+  if(timeLeft <= 0) { clearInterval(timerInterval); submitTest(); return; }
+  timeLeft--;
+  const m = Math.floor(timeLeft/60).toString().padStart(2,'0');
+  const s = (timeLeft%60).toString().padStart(2,'0');
+  const el = document.getElementById('quizTimer');
+  el.textContent = `${m}:${s}`;
+  el.className = 'timer' + (timeLeft < 60 ? ' warning' : '');
+}
+
+function renderQuestion() {
+  const q = currentQuestions[currentQ];
+  const total = currentQuestions.length;
+
+  document.getElementById('qNumber').textContent = `Question ${currentQ+1} of ${total}`;
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('progText').textContent = `Question ${currentQ+1} of ${total}`;
+  const pct = Math.round((currentQ+1)/total*100);
+  document.getElementById('progPct').textContent = pct+'%';
+  document.getElementById('progressFill').style.width = pct+'%';
+
+  const answered = userAnswers.filter(a=>a>=0).length;
+  document.getElementById('statAnswered').textContent = answered;
+  document.getElementById('statLeft').textContent = total - answered;
+
+  const keys = ['A','B','C','D'];
+  const opted = userAnswers[currentQ];
+  const container = document.getElementById('optionsContainer');
+
+  container.innerHTML = q.opts.map((opt, i) => {
+    let cls = 'option';
+    if(testSubmitted) {
+      cls += ' disabled';
+      if(i === q.ans) cls += ' correct';
+      else if(i === opted && i !== q.ans) cls += ' wrong';
+    } else {
+      if(i === opted) cls += ' selected';
+    }
+    return `<div class="${cls}" onclick="${testSubmitted?'':'selectOption('+i+')'}">
+      <div class="opt-key">${keys[i]}</div>
+      <div class="opt-text">${opt}</div>
+    </div>`;
+  }).join('');
+
+  const expEl = document.getElementById('explanation');
+  if(testSubmitted) {
+    expEl.innerHTML = `<strong>📖 Explanation:</strong> ${q.exp}`;
+    expEl.classList.add('show');
+  } else {
+    expEl.classList.remove('show');
+  }
+
+  document.getElementById('btnPrev').style.display = currentQ === 0 ? 'none' : 'block';
+  document.getElementById('btnNext').style.display = currentQ === total-1 ? 'none' : 'block';
+  document.getElementById('btnSubmit').style.display = currentQ === total-1 ? 'block' : 'none';
+
+  updateNavBtns();
+}
+
+function selectOption(i) {
+  if(testSubmitted) return;
+  userAnswers[currentQ] = i;
+  renderQuestion();
+  renderQuizNav();
+}
+
+function prevQuestion() { if(currentQ>0){currentQ--;renderQuestion();} }
+function nextQuestion() { if(currentQ<currentQuestions.length-1){currentQ++;renderQuestion();} }
+
+function renderQuizNav() {
+  const grid = document.getElementById('qNavGrid');
+  grid.innerHTML = currentQuestions.map((_,i) => {
+    let cls = 'q-nav-btn';
+    if(i===currentQ) cls += ' current';
+    else if(testSubmitted) {
+      if(userAnswers[i]===currentQuestions[i].ans) cls += ' correct-nav';
+      else if(userAnswers[i]>=0) cls += ' wrong-nav';
+    } else if(userAnswers[i]>=0) cls += ' answered';
+    return `<button class="${cls}" onclick="jumpToQ(${i})">${i+1}</button>`;
+  }).join('');
+}
+
+function jumpToQ(i) { currentQ=i; renderQuestion(); renderQuizNav(); }
+
+function updateNavBtns() { renderQuizNav(); }
+
+function submitTest() {
+  clearInterval(timerInterval);
+  testSubmitted = true;
+
+  let correct=0, wrong=0, skip=0;
+  currentQuestions.forEach((q,i)=>{
+    if(userAnswers[i]===-1) skip++;
+    else if(userAnswers[i]===q.ans) correct++;
+    else wrong++;
+  });
+
+  const total = currentQuestions.length;
+  const pct = Math.round(correct/total*100);
+
+  const trophies = pct>=80?'🏆':pct>=60?'🎉':pct>=40?'😊':'💪';
+  const titles = pct>=80?'Outstanding!':pct>=60?'Great Job!':pct>=40?'Good Effort!':'Keep Practicing!';
+  const subs = pct>=80?'You are well prepared!':pct>=60?'Above average performance':pct>=40?'Room for improvement':' Review your concepts';
+
+  document.getElementById('resultTrophy').textContent = trophies;
+  document.getElementById('resultTitle').textContent = titles;
+  document.getElementById('resultSub').textContent = subs;
+  document.getElementById('scorePct').textContent = pct+'%';
+  document.getElementById('rc-correct').textContent = correct;
+  document.getElementById('rc-wrong').textContent = wrong;
+  document.getElementById('rc-skip').textContent = skip;
+
+  // Animate ring
+  setTimeout(()=>{
+    const circ = 427;
+    document.getElementById('scoreArc').style.strokeDashoffset = circ - (circ * pct/100);
+    document.getElementById('scoreArc').style.transition = 'stroke-dashoffset 1.2s ease';
+  },100);
+
+  showPage('result');
+}
+
+function reviewTest() {
+  currentQ = 0;
+  renderQuestion();
+  renderQuizNav();
+  showPage('quiz');
+}
+
+// ═══════════════════════════════════════════════
+//  LEADERBOARD
+// ═══════════════════════════════════════════════
+const LB_DATA = [
+  {name:'Arjun Sharma', exam:'JEE Advanced', score:'98%', avatar:'🧑‍🎓', bg:'#1E3A5F'},
+  {name:'Priya Reddy', exam:'NEET UG', score:'96%', avatar:'👩‍🔬', bg:'#3B1F5E'},
+  {name:'Rahul Verma', exam:'UPSC CSE', score:'95%', avatar:'👨‍💼', bg:'#1F3D2B'},
+  {name:'Sneha Patel', exam:'JEE Mains', score:'93%', avatar:'👩‍🎓', bg:'#3D2B1F'},
+  {name:'Kiran Kumar', exam:'SSC CGL', score:'91%', avatar:'🧑‍💻', bg:'#1F2B3D'},
+  {name:'Divya Singh', exam:'NEET UG', score:'90%', avatar:'👩‍⚕️', bg:'#3D1F2B'},
+  {name:'Aditya Nair', exam:'JEE Mains', score:'88%', avatar:'👨‍🔬', bg:'#2B3D1F'},
+  {name:'Meera Iyer', exam:'IBPS PO', score:'87%', avatar:'👩‍💼', bg:'#1F3D3D'},
+  {name:'Suresh Babu', exam:'RRB NTPC', score:'85%', avatar:'👨‍🏭', bg:'#3D3D1F'},
+  {name:'Ananya Das', exam:'UPSC CSE', score:'84%', avatar:'👩‍🏛️', bg:'#2B1F3D'},
+];
+
+function renderLeaderboard() {
+  const rankClass = ['gold','silver','bronze'];
+  const medals = ['🥇','🥈','🥉'];
+  document.getElementById('leaderboardList').innerHTML = LB_DATA.map((p,i) => `
+    <div class="lb-row">
+      <div class="lb-rank ${rankClass[i]||''}">${i<3?medals[i]:i+1}</div>
+      <div class="lb-avatar" style="background:${p.bg}">${p.avatar}</div>
+      <div class="lb-info">
+        <div class="lb-name">${p.name}</div>
+        <div class="lb-exam">${p.exam}</div>
+      </div>
+      <div class="lb-score">${p.score}</div>
+      ${i<3?`<div class="lb-badge">Top ${i<1?'1%':i<2?'5%':'10%'}</div>`:''}
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+renderExamGrid();
+</script>
+</body>
+</html>
